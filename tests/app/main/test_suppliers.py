@@ -2164,7 +2164,7 @@ class TestJoinOpenFrameworkNotificationMailingList(BaseApplicationTest):
             form.xpath(".//input[@name='email_address']")
         )
         assert form.xpath(".//input[@name='csrf_token']")
-        assert form.xpath(".//input[@type='submit'][@value='Subscribe']")
+        assert form.xpath(".//button[normalize-space(string())=$t]", t="Subscribe")
 
         return form
 
