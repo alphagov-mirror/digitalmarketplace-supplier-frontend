@@ -24,7 +24,7 @@
         "href": url_for('.dashboard')
       },
       {
-        "text": "Apply to " + framework.name if framework.status == "open" else framework.name + " documents" if framework.status == "live" else "Your " + framework.name + " application"
+        "text": self.page_title_inner()
       }
     ]
   }) }}
