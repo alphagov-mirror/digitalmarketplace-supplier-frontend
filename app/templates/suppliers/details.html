@@ -5,8 +5,7 @@
 {% endblock %}
 
 {% block breadcrumb %}
-  {{ govukBreadcrumbs({
-    "items": [
+  {% with items = [
       {
         "text": "Digital Marketplace",
         "href": "/"
@@ -15,11 +14,22 @@
         "text": "Your account",
         "href": url_for('.dashboard')
       },
-      {
-        "text": "Company details"
-      }
     ]
-  }) }}
+  %}
+    {% if currently_applying_to %}
+      {{ govukBreadcrumbs({"items": items + [
+        {
+          "text": "Continue with your application",
+          "href": url_for(".framework_dashboard", framework_slug=framework.slug)
+        },
+        {
+          "text": "Company details"
+        }
+      ]}) }}
+    {% else %}
+      {{ govukBreadcrumbs({"items": items + [{"text": "Company details"}]}) }}
+    {% endif %}
+  {% endwith %}
 {% endblock %}
 
 

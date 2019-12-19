@@ -17,7 +17,7 @@
         "href": url_for('.dashboard')
       },
       {
-        "text": "Apply to " + framework.name,
+        "text": "Apply to " + framework.name if framework.status == "open" else ("Your " + framework.name + " application"),
         "href": url_for(".framework_dashboard", framework_slug=framework.slug)
       },
       {

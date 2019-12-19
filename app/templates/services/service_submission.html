@@ -7,8 +7,7 @@
 {% import "macros/submission.html" as submission %}
 
 {% block breadcrumb %}
-  {{ govukBreadcrumbs({
-    "items": [
+  {% with items = [
       {
         "text": "Digital Marketplace",
         "href": "/"
@@ -24,16 +23,23 @@
       {
         "text": "Services",
         "href": url_for(".framework_submission_lots", framework_slug=framework.slug)
-      },
-      {
-        "text": service_data.lotName,
-        "href": url_for(".framework_submission_services", framework_slug=framework.slug, lot_slug=service_data.lot)
-      } if not lot.oneServiceLimit else {},
-      {
-        "text": service_data.get('serviceName', service_data['lotName'])
       }
     ]
-  }) }}
+  %}
+    {% if lot.oneServiceLimit %}
+      {{ govukBreadcrumbs({"items": items + [{"text": section.name}]}) }}
+    {% else %}
+      {{ govukBreadcrumbs({"items": items + [
+        {
+          "text": service_data.lotName,
+          "href": url_for(".framework_submission_services", framework_slug=framework.slug, lot_slug=service_data.lot)
+          },
+        {
+          "text": service_data.get('serviceName', service_data['lotName'])
+        }
+      ]}) }}
+    {% endif %}
+  {% endwith %}
 
   {% if service_data.status == 'submitted' and declaration_status != 'complete' and framework.status == 'open' %}
     <div class="wrapper">
