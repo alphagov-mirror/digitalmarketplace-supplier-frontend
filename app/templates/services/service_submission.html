@@ -27,7 +27,7 @@
     ]
   %}
     {% if lot.oneServiceLimit %}
-      {{ govukBreadcrumbs({"items": items + [{"text": section.name}]}) }}
+      {{ govukBreadcrumbs({"items": items + [{"text": service_data.get('serviceName', service_data['lotName'])}]}) }}
     {% else %}
       {{ govukBreadcrumbs({"items": items + [
         {
