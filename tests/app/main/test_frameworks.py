@@ -5779,7 +5779,7 @@ class TestSignatureLegalAuthority(BaseApplicationTest):
             ('g-cloud-12', False, 400),
         )
     )
-    def test_only_works_for_supported_frameworks(self,framework_slug, on_framework, status_code):
+    def test_only_works_for_supported_frameworks(self, framework_slug, on_framework, status_code):
         self.login()
         self.data_api_client.get_framework.return_value = self.framework(status='standstill', slug=framework_slug)
         self.data_api_client.find_draft_services_iter.return_value = [
