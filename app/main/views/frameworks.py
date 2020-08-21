@@ -1234,7 +1234,7 @@ def legal_authority(framework_slug):
     if not get_supplier_on_framework_from_info(supplier_framework):
         return render_error_page(status_code=400, error_message="You must be on the framework to sign agreement.")
     form = LegalAuthorityForm()
-    if request.method == 'POST' and form.validate():
+    if form.validate_on_submit():
         response = form.legal_authority.data
         if response == 'no':
             return render_template("frameworks/legal_authority_no.html")
